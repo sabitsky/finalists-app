@@ -35,6 +35,67 @@ function clamp2Style() {
   };
 }
 
+const TOKENS = {
+  colors: {
+    ink: "#0F172A",
+    inkStrong: "#111827",
+    muted: "#64748B",
+    slate: "#334155",
+    border: "#E5E7EB",
+    borderSoft: "rgba(229,231,235,0.8)",
+    surface: "#FFFFFF",
+    surfaceAlt: "#F8FAFC",
+    surfaceSoft: "#F3F4F6",
+    overlay: "rgba(17,24,39,0.40)",
+    positive: "#10B981",
+    negative: "#F43F5E",
+    warn: "#F59E0B",
+    violetBg: "#F5F3FF",
+    violetText: "#5B21B6",
+    violetBorder: "#EDE9FE",
+    destructiveBg: "#FEE2E2",
+    destructiveText: "#991B1B",
+    destructiveBorder: "#FECACA",
+    riskLowBg: "#ECFDF5",
+    riskLowBorder: "#A7F3D0",
+    riskLowText: "#065F46",
+    riskHighBg: "#FFF1F2",
+    riskHighBorder: "#FECDD3",
+    riskHighText: "#9F1239",
+    riskMedBg: "#FFFBEB",
+    riskMedBorder: "#FDE68A",
+    riskMedText: "#92400E",
+    dot: "#94A3B8",
+    avatarA1: "#E7E5FF",
+    avatarA2: "#FDF2F8",
+    avatarB1: "#E5F6FF",
+    avatarB2: "#ECFDF5",
+    avatarC1: "#FFF1E7",
+    avatarC2: "#EEF2FF",
+    avatarAccentA: "#7C3AED",
+    avatarAccentB: "#0EA5E9",
+    avatarAccentC: "#F97316",
+  },
+  shadows: {
+    buttonPrimary: "0 8px 20px rgba(17,24,39,0.18)",
+    buttonSecondary: "0 6px 18px rgba(17,24,39,0.08)",
+    buttonOutline: "0 6px 18px rgba(17,24,39,0.06)",
+    buttonDestructive: "0 6px 18px rgba(153,27,27,0.10)",
+    iconButton: "0 6px 18px rgba(17,24,39,0.06)",
+    card: "0 12px 28px rgba(17,24,39,0.06)",
+    phone: "0 30px 60px rgba(15, 23, 42, 0.10)",
+    toneDot: "0 6px 16px rgba(17,24,39,0.12)",
+    chip: "0 10px 24px rgba(17,24,39,0.06)",
+    segmentedActive: "0 10px 24px rgba(17,24,39,0.20)",
+    segmentedInactive: "0 8px 18px rgba(17,24,39,0.06)",
+    pickBadge: "0 10px 20px rgba(17,24,39,0.25)",
+    cardButton: "0 18px 30px rgba(15, 23, 42, 0.08)",
+    compareCard: "0 14px 24px rgba(15, 23, 42, 0.06)",
+    compareCell: "0 12px 22px rgba(15, 23, 42, 0.05)",
+    sheet: "0 -24px 60px rgba(15,23,42,0.20)",
+  },
+};
+
 function Icon({ name, size = 18, style }) {
   const common = {
     width: size,
@@ -257,33 +318,33 @@ function Button({
 
   const variants = {
     primary: {
-      background: "#111827",
-      color: "#FFFFFF",
-      boxShadow: "0 8px 20px rgba(17,24,39,0.18)",
+      background: TOKENS.colors.inkStrong,
+      color: TOKENS.colors.surface,
+      boxShadow: TOKENS.shadows.buttonPrimary,
     },
     secondary: {
-      background: "#F3F4F6",
-      color: "#111827",
-      borderColor: "#E5E7EB",
-      boxShadow: "0 6px 18px rgba(17,24,39,0.08)",
+      background: TOKENS.colors.surfaceSoft,
+      color: TOKENS.colors.inkStrong,
+      borderColor: TOKENS.colors.border,
+      boxShadow: TOKENS.shadows.buttonSecondary,
     },
     ghost: {
       background: "transparent",
-      color: "#111827",
+      color: TOKENS.colors.inkStrong,
       borderColor: "transparent",
       boxShadow: "none",
     },
     destructive: {
-      background: "#FEE2E2",
-      color: "#991B1B",
-      borderColor: "#FECACA",
-      boxShadow: "0 6px 18px rgba(153,27,27,0.10)",
+      background: TOKENS.colors.destructiveBg,
+      color: TOKENS.colors.destructiveText,
+      borderColor: TOKENS.colors.destructiveBorder,
+      boxShadow: TOKENS.shadows.buttonDestructive,
     },
     outline: {
-      background: "#FFFFFF",
-      color: "#111827",
-      borderColor: "#E5E7EB",
-      boxShadow: "0 6px 18px rgba(17,24,39,0.06)",
+      background: TOKENS.colors.surface,
+      color: TOKENS.colors.inkStrong,
+      borderColor: TOKENS.colors.border,
+      boxShadow: TOKENS.shadows.buttonOutline,
     },
   };
 
@@ -316,8 +377,8 @@ function IconButton({ onClick, icon, label, style }) {
       aria-label={label}
       style={{
         appearance: "none",
-        border: "1px solid #E5E7EB",
-        background: "#FFFFFF",
+        border: `1px solid ${TOKENS.colors.border}`,
+        background: TOKENS.colors.surface,
         width: 36,
         height: 36,
         borderRadius: 999,
@@ -325,7 +386,7 @@ function IconButton({ onClick, icon, label, style }) {
         alignItems: "center",
         justifyContent: "center",
         cursor: "pointer",
-        boxShadow: "0 6px 18px rgba(17,24,39,0.06)",
+        boxShadow: TOKENS.shadows.iconButton,
         WebkitTapHighlightColor: "transparent",
         ...style,
       }}
@@ -349,13 +410,21 @@ function Badge({ children, variant = "soft", style }) {
     whiteSpace: "nowrap",
   };
   const variants = {
-    soft: { background: "#F3F4F6", color: "#111827", borderColor: "#E5E7EB" },
-    outline: {
-      background: "#FFFFFF",
-      color: "#111827",
-      borderColor: "#E5E7EB",
+    soft: {
+      background: TOKENS.colors.surfaceSoft,
+      color: TOKENS.colors.inkStrong,
+      borderColor: TOKENS.colors.border,
     },
-    violet: { background: "#F5F3FF", color: "#5B21B6", borderColor: "#EDE9FE" },
+    outline: {
+      background: TOKENS.colors.surface,
+      color: TOKENS.colors.inkStrong,
+      borderColor: TOKENS.colors.border,
+    },
+    violet: {
+      background: TOKENS.colors.violetBg,
+      color: TOKENS.colors.violetText,
+      borderColor: TOKENS.colors.violetBorder,
+    },
   };
   return (
     <span style={{ ...base, ...(variants[variant] || variants.soft), ...style }}>
@@ -368,10 +437,10 @@ function Card({ children, style }) {
   return (
     <div
       style={{
-        border: "1px solid #E5E7EB",
-        background: "#FFFFFF",
+        border: `1px solid ${TOKENS.colors.border}`,
+        background: TOKENS.colors.surface,
         borderRadius: 20,
-        boxShadow: "0 12px 28px rgba(17,24,39,0.06)",
+        boxShadow: TOKENS.shadows.card,
         ...style,
       }}
     >
@@ -383,7 +452,7 @@ function Card({ children, style }) {
 function Separator({ style }) {
   return (
     <div
-      style={{ height: 1, background: "#E5E7EB", width: "100%", ...style }}
+      style={{ height: 1, background: TOKENS.colors.border, width: "100%", ...style }}
     />
   );
 }
@@ -394,8 +463,8 @@ function Segmented({ value, onChange }) {
     gap: 6,
     padding: 6,
     borderRadius: 999,
-    background: "#F3F4F6",
-    border: "1px solid #E5E7EB",
+    background: TOKENS.colors.surfaceSoft,
+    border: `1px solid ${TOKENS.colors.border}`,
   };
 
   function Seg({ id, label }) {
@@ -411,11 +480,11 @@ function Segmented({ value, onChange }) {
           fontSize: 12,
           fontWeight: 750,
           cursor: "pointer",
-          background: active ? "#111827" : "#FFFFFF",
-          color: active ? "#FFFFFF" : "#111827",
+          background: active ? TOKENS.colors.inkStrong : TOKENS.colors.surface,
+          color: active ? TOKENS.colors.surface : TOKENS.colors.inkStrong,
           boxShadow: active
-            ? "0 10px 24px rgba(17,24,39,0.20)"
-            : "0 8px 18px rgba(17,24,39,0.06)",
+            ? TOKENS.shadows.segmentedActive
+            : TOKENS.shadows.segmentedInactive,
           WebkitTapHighlightColor: "transparent",
         }}
       >
@@ -444,7 +513,7 @@ function Overlay({ open, onClose, children, align = "center" }) {
         display: "flex",
         alignItems: align === "bottom" ? "flex-end" : "center",
         justifyContent: "center",
-        background: "rgba(17,24,39,0.40)",
+        background: TOKENS.colors.overlay,
         padding: 16,
       }}
     >
@@ -465,7 +534,7 @@ function Overlay({ open, onClose, children, align = "center" }) {
 
 function ToneDot({ tone }) {
   const color =
-    tone === "pos" ? "#10B981" : tone === "neg" ? "#F43F5E" : "#F59E0B";
+    tone === "pos" ? TOKENS.colors.positive : tone === "neg" ? TOKENS.colors.negative : TOKENS.colors.warn;
   return (
     <span
       style={{
@@ -473,7 +542,7 @@ function ToneDot({ tone }) {
         height: 8,
         borderRadius: 999,
         background: color,
-        boxShadow: "0 6px 16px rgba(17,24,39,0.12)",
+        boxShadow: TOKENS.shadows.toneDot,
         display: "inline-block",
       }}
     />
@@ -489,15 +558,39 @@ function Chip({ children }) {
         gap: 8,
         padding: "7px 10px",
         borderRadius: 999,
-        border: "1px solid #E5E7EB",
-        background: "#FFFFFF",
+        border: `1px solid ${TOKENS.colors.border}`,
+        background: TOKENS.colors.surface,
         fontSize: 12,
         fontWeight: 650,
-        boxShadow: "0 10px 24px rgba(17,24,39,0.06)",
+        boxShadow: TOKENS.shadows.chip,
       }}
     >
       {children}
     </span>
+  );
+}
+
+function Avatar({ src, alt, size = 56, radius = 18, style, children }) {
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: size,
+        height: size,
+        borderRadius: radius,
+        overflow: "hidden",
+        background: TOKENS.colors.border,
+        flexShrink: 0,
+        ...style,
+      }}
+    >
+      <img
+        src={src}
+        alt={alt}
+        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+      />
+      {children}
+    </div>
   );
 }
 
@@ -507,24 +600,24 @@ function RiskPill({ risk }) {
       ? {
           label: "Низкий",
           icon: "riskLow",
-          bg: "#ECFDF5",
-          bd: "#A7F3D0",
-          fg: "#065F46",
+          bg: TOKENS.colors.riskLowBg,
+          bd: TOKENS.colors.riskLowBorder,
+          fg: TOKENS.colors.riskLowText,
         }
       : risk === "high"
       ? {
           label: "Высокий",
           icon: "riskHigh",
-          bg: "#FFF1F2",
-          bd: "#FECDD3",
-          fg: "#9F1239",
+          bg: TOKENS.colors.riskHighBg,
+          bd: TOKENS.colors.riskHighBorder,
+          fg: TOKENS.colors.riskHighText,
         }
       : {
           label: "Средний",
           icon: "riskMed",
-          bg: "#FFFBEB",
-          bd: "#FDE68A",
-          fg: "#92400E",
+          bg: TOKENS.colors.riskMedBg,
+          bd: TOKENS.colors.riskMedBorder,
+          fg: TOKENS.colors.riskMedText,
         };
 
   return (
@@ -558,9 +651,9 @@ function RecommendedPill() {
         gap: 6,
         padding: "4px 10px",
         borderRadius: 999,
-        background: "#F5F3FF",
-        border: "1px solid #EDE9FE",
-        color: "#5B21B6",
+        background: TOKENS.colors.violetBg,
+        border: `1px solid ${TOKENS.colors.violetBorder}`,
+        color: TOKENS.colors.violetText,
         fontSize: 11,
         fontWeight: 750,
         lineHeight: "14px",
@@ -574,9 +667,9 @@ function RecommendedPill() {
 
 function svgAvatar(seed, title) {
   // Lightweight pseudo-photo placeholder (always works offline).
-  const bg1 = seed === "a" ? "#E7E5FF" : seed === "b" ? "#E5F6FF" : "#FFF1E7";
-  const bg2 = seed === "a" ? "#FDF2F8" : seed === "b" ? "#ECFDF5" : "#EEF2FF";
-  const accent = seed === "a" ? "#7C3AED" : seed === "b" ? "#0EA5E9" : "#F97316";
+  const bg1 = seed === "a" ? TOKENS.colors.avatarA1 : seed === "b" ? TOKENS.colors.avatarB1 : TOKENS.colors.avatarC1;
+  const bg2 = seed === "a" ? TOKENS.colors.avatarA2 : seed === "b" ? TOKENS.colors.avatarB2 : TOKENS.colors.avatarC2;
+  const accent = seed === "a" ? TOKENS.colors.avatarAccentA : seed === "b" ? TOKENS.colors.avatarAccentB : TOKENS.colors.avatarAccentC;
   const initials = title
     .split(" ")
     .filter(Boolean)
@@ -730,11 +823,11 @@ export default function FinalistsPresentationPhoneMock() {
   const page = {
     minHeight: "100vh",
     width: "100%",
-    background: "linear-gradient(180deg, #F8FAFC 0%, #F3F4F6 100%)",
+    background: `linear-gradient(180deg, ${TOKENS.colors.surfaceAlt} 0%, ${TOKENS.colors.surfaceSoft} 100%)`,
     padding: 16,
     fontFamily:
       "Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
-    color: "#0F172A",
+    color: TOKENS.colors.ink,
   };
 
   const phone = {
@@ -742,9 +835,9 @@ export default function FinalistsPresentationPhoneMock() {
     maxWidth: 390,
     margin: "0 auto",
     borderRadius: 36,
-    border: "1px solid #E5E7EB",
-    background: "#FFFFFF",
-    boxShadow: "0 30px 60px rgba(15, 23, 42, 0.10)",
+    border: `1px solid ${TOKENS.colors.border}`,
+    background: TOKENS.colors.surface,
+    boxShadow: TOKENS.shadows.phone,
     overflow: "hidden",
   };
 
@@ -758,7 +851,7 @@ export default function FinalistsPresentationPhoneMock() {
     padding: "2px 2px 10px",
   };
 
-  const subtle = { color: "#64748B", fontSize: 12, fontWeight: 650 };
+  const subtle = { color: TOKENS.colors.muted, fontSize: 12, fontWeight: 650 };
 
   const stickyActions = {
     position: "sticky",
@@ -767,7 +860,18 @@ export default function FinalistsPresentationPhoneMock() {
     paddingBottom: 6,
     background: "rgba(255,255,255,0.92)",
     backdropFilter: "blur(10px)",
-    borderTop: "1px solid rgba(229,231,235,0.8)",
+    borderTop: `1px solid ${TOKENS.colors.borderSoft}`,
+  };
+
+  const styles = {
+    rowBetween: { display: "flex", alignItems: "center", justifyContent: "space-between" },
+    rowCenter: { display: "flex", alignItems: "center" },
+    rowStart: { display: "flex", alignItems: "flex-start" },
+    col: { display: "flex", flexDirection: "column" },
+    grid2: { display: "grid", gridTemplateColumns: "1fr 1fr" },
+    grid3: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr" },
+    mutedSm: { fontSize: 12, color: TOKENS.colors.muted, fontWeight: 650 },
+    mutedXs: { fontSize: 11, color: TOKENS.colors.muted, fontWeight: 650 },
   };
 
   // -------------------------
@@ -780,7 +884,7 @@ export default function FinalistsPresentationPhoneMock() {
         <div style={inner}>
           {/* Top bar */}
           <div style={topRow}>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, ...subtle }}>
+            <div style={{ ...styles.rowCenter, gap: 8, ...subtle }}>
               <Icon name="eye" size={18} style={{ color: "#111827" }} />
               Просмотр (принципал)
             </div>
@@ -795,12 +899,12 @@ export default function FinalistsPresentationPhoneMock() {
           {/* Ultra-short position header */}
           <Card>
             <div style={{ padding: 14 }}>
-              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12 }}>
+              <div style={{ ...styles.rowBetween, alignItems: "flex-start", gap: 12 }}>
                 <div style={{ minWidth: 0 }}>
                   <div style={{ fontSize: 15, fontWeight: 800, lineHeight: "18px" }}>
                     {position.role}
                   </div>
-                  <div style={{ marginTop: 4, fontSize: 12, color: "#64748B", fontWeight: 650 }}>
+                  <div style={{ marginTop: 4, ...styles.mutedSm }}>
                     {position.location}
                   </div>
                 </div>
@@ -809,10 +913,10 @@ export default function FinalistsPresentationPhoneMock() {
                 </Badge>
               </div>
 
-              <div style={{ marginTop: 10, display: "flex", gap: 10, alignItems: "flex-start", justifyContent: "space-between" }}>
-                <div style={{ display: "flex", gap: 8, minWidth: 0 }}>
+              <div style={{ marginTop: 10, ...styles.rowBetween, alignItems: "flex-start", gap: 10 }}>
+                <div style={{ ...styles.rowStart, gap: 8, minWidth: 0 }}>
                   <Icon name="lock" size={18} style={{ color: "#111827", marginTop: 1 }} />
-                  <div style={{ fontSize: 12, color: "#64748B", fontWeight: 650, lineHeight: "16px" }}>
+                  <div style={{ ...styles.mutedSm, lineHeight: "16px" }}>
                     Приватно: доступ только по прямой ссылке, не индексируется.
                     <br />
                     Данных принципала здесь нет — только анкеты соискателей.
@@ -840,12 +944,12 @@ export default function FinalistsPresentationPhoneMock() {
           <div style={{ marginTop: 12 }}>
             {tab === "finalists" ? (
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 2px" }}>
+                <div style={{ ...styles.rowBetween, padding: "0 2px" }}>
                   <div style={{ fontSize: 14, fontWeight: 850 }}>3 финалиста</div>
-                  <div style={{ fontSize: 12, color: "#64748B", fontWeight: 650 }}>Нажмите для деталей</div>
+                  <div style={styles.mutedSm}>Нажмите для деталей</div>
                 </div>
 
-                <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+                <div style={{ ...styles.col, gap: 10 }}>
                   {candidates.map((c, i) => {
                     const isPicked = pickedId === c.id;
                     return (
@@ -868,13 +972,8 @@ export default function FinalistsPresentationPhoneMock() {
                         }}
                         aria-label={`Открыть ${c.name}`}
                       >
-                        <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-                          <div style={{ position: "relative", width: 56, height: 56, borderRadius: 18, overflow: "hidden", background: "#E5E7EB", flexShrink: 0 }}>
-                            <img
-                              src={c.photoDataUri}
-                              alt={`Фото ${c.name}`}
-                              style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                            />
+                        <div style={{ ...styles.rowStart, gap: 12 }}>
+                          <Avatar src={c.photoDataUri} alt={`Фото ${c.name}`} size={56} radius={18}>
                             {isPicked ? (
                               <span
                                 style={{
@@ -895,29 +994,29 @@ export default function FinalistsPresentationPhoneMock() {
                                 <Icon name="check" size={16} />
                               </span>
                             ) : null}
-                          </div>
+                          </Avatar>
 
                           <div style={{ minWidth: 0, flex: 1 }}>
-                            <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10 }}>
+                            <div style={{ ...styles.rowBetween, alignItems: "flex-start", gap: 10 }}>
                               <div style={{ minWidth: 0 }}>
-                                <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                                <div style={{ ...styles.rowCenter, gap: 8, flexWrap: "wrap" }}>
                                   <div style={{ fontSize: 15, fontWeight: 850, maxWidth: 150, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                                     {c.name}
                                   </div>
                                   {c.assistantRecommended ? <RecommendedPill /> : null}
                                 </div>
-                                <div style={{ marginTop: 3, fontSize: 12, color: "#64748B", fontWeight: 650, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                <div style={{ marginTop: 3, ...styles.mutedSm, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                                   {c.title}
                                 </div>
                               </div>
 
                               <div style={{ textAlign: "right", flexShrink: 0 }}>
                                 <div style={{ fontSize: 14, fontWeight: 900 }}>{moneyEUR(c.compMonthlyEUR)}</div>
-                                <div style={{ fontSize: 11, color: "#64748B", fontWeight: 650 }}>в месяц</div>
+                                <div style={styles.mutedXs}>в месяц</div>
                               </div>
                             </div>
 
-                            <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+                            <div style={{ marginTop: 8, ...styles.rowCenter, gap: 8, flexWrap: "wrap" }}>
                               <RiskPill risk={c.risk} />
                               <Badge variant="soft">{c.availability}</Badge>
                             </div>
@@ -929,13 +1028,11 @@ export default function FinalistsPresentationPhoneMock() {
                                 border: "1px solid #E5E7EB",
                                 background: "#F8FAFC",
                                 padding: "8px 10px",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "space-between",
+                                ...styles.rowBetween,
                                 gap: 10,
                               }}
                             >
-                              <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, fontWeight: 750, color: "#0F172A" }}>
+                              <div style={{ ...styles.rowCenter, gap: 8, fontSize: 12, fontWeight: 750, color: "#0F172A" }}>
                                 <Icon name="play" size={18} />
                                 Видео-визитка · {c.introSeconds}с
                               </div>
@@ -944,9 +1041,9 @@ export default function FinalistsPresentationPhoneMock() {
 
                             <div style={{ marginTop: 8 }}>
                               <div style={{ fontSize: 11, fontWeight: 900, color: "#334155" }}>Почему этот кандидат</div>
-                              <ul style={{ marginTop: 6, paddingLeft: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 6 }}>
+                              <ul style={{ marginTop: 6, paddingLeft: 0, listStyle: "none", ...styles.col, gap: 6 }}>
                                 {c.why.slice(0, 3).map((w, wi) => (
-                                  <li key={wi} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+                                  <li key={wi} style={{ ...styles.rowStart, gap: 8 }}>
                                     <span style={{ width: 6, height: 6, borderRadius: 999, background: "#94A3B8", marginTop: 6, flexShrink: 0 }} />
                                     <span style={{ fontSize: 12, fontWeight: 650, color: "#0F172A", lineHeight: "16px", ...clamp2Style() }}>
                                       {w}
@@ -962,23 +1059,23 @@ export default function FinalistsPresentationPhoneMock() {
                   })}
                 </div>
 
-                <div style={{ padding: "0 2px", fontSize: 11, color: "#64748B", fontWeight: 650, lineHeight: "14px" }}>
+                <div style={{ padding: "0 2px", ...styles.mutedXs, lineHeight: "14px" }}>
                   Можно переслать ссылку супруге: она сможет выбрать кандидата, задать вопросы или вернуть на доработку.
                 </div>
               </div>
             ) : null}
 
             {tab === "compare" ? (
-              <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 2px" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 14, fontWeight: 850 }}>
+              <div style={{ ...styles.col, gap: 10 }}>
+                <div style={{ ...styles.rowBetween, padding: "0 2px" }}>
+                  <div style={{ ...styles.rowCenter, gap: 8, fontSize: 14, fontWeight: 850 }}>
                     <Icon name="compare" size={18} /> Сравнение
                   </div>
-                  <div style={{ fontSize: 12, color: "#64748B", fontWeight: 650 }}>Нажмите по колонке</div>
+                  <div style={styles.mutedSm}>Нажмите по колонке</div>
                 </div>
 
                 <Card>
-                  <div style={{ padding: 14, display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div style={{ padding: 14, ...styles.col, gap: 12 }}>
                     {/* Compare header */}
                     <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
                       {candidates.map((c, j) => {
@@ -1002,19 +1099,13 @@ export default function FinalistsPresentationPhoneMock() {
                               WebkitTapHighlightColor: "transparent",
                             }}
                           >
-                            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                              <div style={{ width: 38, height: 38, borderRadius: 14, overflow: "hidden", background: "#E5E7EB", flexShrink: 0 }}>
-                                <img
-                                  src={c.photoDataUri}
-                                  alt={`Фото ${c.name}`}
-                                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                                />
-                              </div>
+                            <div style={{ ...styles.rowCenter, gap: 8 }}>
+                              <Avatar src={c.photoDataUri} alt={`Фото ${c.name}`} size={38} radius={14} />
                               <div style={{ minWidth: 0 }}>
                                 <div style={{ fontSize: 13, fontWeight: 850, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                                   {c.name}
                                 </div>
-                                <div style={{ fontSize: 11, color: "#64748B", fontWeight: 650, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                <div style={{ ...styles.mutedXs, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                                   {moneyEUR(c.compMonthlyEUR)}
                                 </div>
                               </div>
@@ -1033,7 +1124,7 @@ export default function FinalistsPresentationPhoneMock() {
 
                     {/* Compare rows */}
                     {comparison.map((row, i) => (
-                      <div key={row.k} style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                      <div key={row.k} style={{ ...styles.col, gap: 8 }}>
                         <div style={{ fontSize: 12, fontWeight: 900, color: "#334155" }}>{row.k}</div>
                         <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
                           {row.v.map((v, j) => (
@@ -1066,7 +1157,7 @@ export default function FinalistsPresentationPhoneMock() {
                       </div>
                     ))}
 
-                    <div style={{ fontSize: 11, color: "#64748B", fontWeight: 650 }}>
+                    <div style={styles.mutedXs}>
                       В сравнении показано только то, что помогает принять решение быстро.
                     </div>
                   </div>
@@ -1077,7 +1168,7 @@ export default function FinalistsPresentationPhoneMock() {
 
           {/* Bottom actions */}
           <div style={stickyActions}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+            <div style={{ ...styles.grid2, gap: 10 }}>
               <Button
                 variant="secondary"
                 onClick={() => setConfirmOpen("none")}
@@ -1093,14 +1184,14 @@ export default function FinalistsPresentationPhoneMock() {
                 {picked ? `Подтвердить: ${picked.name}` : "Подтвердить выбор"}
               </Button>
             </div>
-            <div style={{ marginTop: 8, textAlign: "center", fontSize: 11, color: "#64748B", fontWeight: 650 }}>
+            <div style={{ marginTop: 8, textAlign: "center", ...styles.mutedXs }}>
               Решение уйдёт ассистенту в структурированном виде.
             </div>
           </div>
         </div>
       </div>
 
-      <div style={{ maxWidth: 390, margin: "10px auto 0", textAlign: "center", fontSize: 12, color: "#64748B", fontWeight: 650 }}>
+      <div style={{ maxWidth: 390, margin: "10px auto 0", textAlign: "center", ...styles.mutedSm }}>
         Прототип · мобильный экран · заглушки для фото/видео/документов.
       </div>
 
@@ -1110,16 +1201,16 @@ export default function FinalistsPresentationPhoneMock() {
           <Card>
             <div style={{ padding: 14 }}>
               <div style={{ fontSize: 15, fontWeight: 900 }}>Почему это лучше «бумажек»</div>
-              <div style={{ marginTop: 4, fontSize: 12, color: "#64748B", fontWeight: 650 }}>
+              <div style={{ marginTop: 4, ...styles.mutedSm }}>
                 Подготовил: {position.preparedBy} · обновлено: {position.updatedAt}
               </div>
 
-              <div style={{ marginTop: 12, display: "flex", flexDirection: "column", gap: 10 }}>
+              <div style={{ marginTop: 12, ...styles.col, gap: 10 }}>
                 <div style={{ borderRadius: 18, border: "1px solid #E5E7EB", background: "#F8FAFC", padding: 12 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 900 }}>
+                  <div style={{ ...styles.rowCenter, gap: 8, fontSize: 13, fontWeight: 900 }}>
                     <Icon name="spark" size={18} /> Привычный формат = быстрее решение
                   </div>
-                  <div style={{ marginTop: 6, fontSize: 12, color: "#64748B", fontWeight: 650, lineHeight: "16px" }}>
+                  <div style={{ marginTop: 6, ...styles.mutedSm, lineHeight: "16px" }}>
                     Один и тот же шаблон дисциплинирует ассистента и снимает лишнюю когнитивную нагрузку у принципала.
                   </div>
                 </div>
@@ -1130,32 +1221,32 @@ export default function FinalistsPresentationPhoneMock() {
                     <div style={{ fontSize: 13, fontWeight: 700, color: "#0F172A", lineHeight: "17px" }}>
                       «Если вы не можете описать то, что делаете, как процесс — вы не знаете, что вы делаете»
                     </div>
-                    <div style={{ marginTop: 6, fontSize: 12, color: "#64748B", fontWeight: 650 }}>
+                    <div style={{ marginTop: 6, ...styles.mutedSm }}>
                       — У. Эдвардс Деминг
                     </div>
                   </div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <div style={{ ...styles.grid2, gap: 10 }}>
                   <div style={{ borderRadius: 18, border: "1px solid #E5E7EB", background: "#F8FAFC", padding: 12 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 900 }}>
+                    <div style={{ ...styles.rowCenter, gap: 8, fontSize: 13, fontWeight: 900 }}>
                       <Icon name="send" size={18} /> Решение фиксируется
                     </div>
-                    <div style={{ marginTop: 6, fontSize: 12, color: "#64748B", fontWeight: 650, lineHeight: "16px" }}>
+                    <div style={{ marginTop: 6, ...styles.mutedSm, lineHeight: "16px" }}>
                       Выбор/вопросы уходят ассистенту сразу, без пересказов.
                     </div>
                   </div>
                   <div style={{ borderRadius: 18, border: "1px solid #E5E7EB", background: "#F8FAFC", padding: 12 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 900 }}>
+                    <div style={{ ...styles.rowCenter, gap: 8, fontSize: 13, fontWeight: 900 }}>
                       <Icon name="lock" size={18} /> Приватно
                     </div>
-                    <div style={{ marginTop: 6, fontSize: 12, color: "#64748B", fontWeight: 650, lineHeight: "16px" }}>
+                    <div style={{ marginTop: 6, ...styles.mutedSm, lineHeight: "16px" }}>
                       Только по ссылке. Можно отозвать доступ.
                     </div>
                   </div>
                 </div>
 
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+                <div style={{ ...styles.grid2, gap: 10 }}>
                   <Button variant="secondary" onClick={() => setWhyOpen(false)}>
                     Закрыть
                   </Button>
@@ -1173,20 +1264,20 @@ export default function FinalistsPresentationPhoneMock() {
           <Card>
             <div style={{ padding: 14 }}>
               <div style={{ fontSize: 15, fontWeight: 900 }}>Поделиться приватной ссылкой</div>
-              <div style={{ marginTop: 4, fontSize: 12, color: "#64748B", fontWeight: 650, lineHeight: "16px" }}>
+              <div style={{ marginTop: 4, ...styles.mutedSm, lineHeight: "16px" }}>
                 Например, супруге: она сможет выбрать кандидата, задать вопросы или вернуть на доработку.
               </div>
 
               <div style={{ marginTop: 12, borderRadius: 18, border: "1px solid #E5E7EB", background: "#F8FAFC", padding: 12 }}>
-                <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+                <div style={{ ...styles.rowStart, gap: 8 }}>
                   <Icon name="lock" size={18} style={{ marginTop: 1 }} />
-                  <div style={{ fontSize: 12, color: "#64748B", fontWeight: 650, lineHeight: "16px" }}>
+                  <div style={{ ...styles.mutedSm, lineHeight: "16px" }}>
                     Доступ только по прямой ссылке. Не индексируется. Данные принципала не отображаются.
                   </div>
                 </div>
               </div>
 
-              <div style={{ marginTop: 12, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <div style={{ marginTop: 12, ...styles.grid2, gap: 10 }}>
                 <Button variant="secondary" icon={<Icon name="copy" size={18} />} onClick={() => {}}>
                   Скопировать
                 </Button>
@@ -1213,7 +1304,7 @@ export default function FinalistsPresentationPhoneMock() {
               <div style={{ fontSize: 15, fontWeight: 900 }}>
                 {confirmOpen === "pick" ? "Подтвердить выбор" : "Продолжить поиск"}
               </div>
-              <div style={{ marginTop: 4, fontSize: 12, color: "#64748B", fontWeight: 650, lineHeight: "16px" }}>
+              <div style={{ marginTop: 4, ...styles.mutedSm, lineHeight: "16px" }}>
                 {confirmOpen === "pick"
                   ? picked
                     ? `Отправить ассистенту выбор: ${picked.name}?`
@@ -1223,16 +1314,14 @@ export default function FinalistsPresentationPhoneMock() {
 
               {confirmOpen === "pick" && picked ? (
                 <div style={{ marginTop: 12, borderRadius: 18, border: "1px solid #E5E7EB", background: "#F8FAFC", padding: 12 }}>
-                  <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
-                    <div style={{ width: 48, height: 48, borderRadius: 18, overflow: "hidden", background: "#E5E7EB" }}>
-                      <img src={picked.photoDataUri} alt={`Фото ${picked.name}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                    </div>
+                  <div style={{ ...styles.rowCenter, gap: 10 }}>
+                    <Avatar src={picked.photoDataUri} alt={`Фото ${picked.name}`} size={48} radius={18} />
                     <div style={{ minWidth: 0 }}>
                       <div style={{ fontSize: 13, fontWeight: 900 }}>{picked.name}</div>
-                      <div style={{ fontSize: 12, color: "#64748B", fontWeight: 650, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                      <div style={{ ...styles.mutedSm, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                         {picked.title}
                       </div>
-                      <div style={{ marginTop: 4, fontSize: 12, color: "#64748B", fontWeight: 650 }}>
+                      <div style={{ marginTop: 4, ...styles.mutedSm }}>
                         {moneyEUR(picked.compMonthlyEUR)} / мес · {picked.availability}
                       </div>
                     </div>
@@ -1240,7 +1329,7 @@ export default function FinalistsPresentationPhoneMock() {
                 </div>
               ) : null}
 
-              <div style={{ marginTop: 12, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <div style={{ marginTop: 12, ...styles.grid2, gap: 10 }}>
                 <Button variant="secondary" onClick={() => setConfirmOpen(null)}>
                   Отмена
                 </Button>
@@ -1269,9 +1358,9 @@ export default function FinalistsPresentationPhoneMock() {
             <div style={{ padding: 12 }}>
               <div style={{ width: 48, height: 6, borderRadius: 999, background: "#E5E7EB", margin: "4px auto 10px" }} />
 
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10, padding: "0 2px 10px" }}>
+              <div style={{ ...styles.rowBetween, gap: 10, padding: "0 2px 10px" }}>
                 <div style={{ fontSize: 13, fontWeight: 900 }}>Детали кандидата</div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <div style={{ ...styles.rowCenter, gap: 8 }}>
                   <IconButton
                     onClick={() => setSelectedIdx((v) => (v - 1 + candidates.length) % candidates.length)}
                     label="Назад"
@@ -1291,19 +1380,17 @@ export default function FinalistsPresentationPhoneMock() {
               </div>
 
               <Card>
-                <div style={{ padding: 14, display: "flex", flexDirection: "column", gap: 14 }}>
+                <div style={{ padding: 14, ...styles.col, gap: 14 }}>
                   {/* Header */}
-                  <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10 }}>
-                    <div style={{ display: "flex", gap: 10, minWidth: 0 }}>
-                      <div style={{ width: 56, height: 56, borderRadius: 18, overflow: "hidden", background: "#E5E7EB", flexShrink: 0 }}>
-                        <img src={current.photoDataUri} alt={`Фото ${current.name}`} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-                      </div>
+                  <div style={{ ...styles.rowBetween, alignItems: "flex-start", gap: 10 }}>
+                    <div style={{ ...styles.rowStart, gap: 10, minWidth: 0 }}>
+                      <Avatar src={current.photoDataUri} alt={`Фото ${current.name}`} size={56} radius={18} />
                       <div style={{ minWidth: 0 }}>
-                        <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+                        <div style={{ ...styles.rowCenter, gap: 8, flexWrap: "wrap" }}>
                           <div style={{ fontSize: 15, fontWeight: 900 }}>{current.name}</div>
                           {current.assistantRecommended ? <RecommendedPill /> : null}
                         </div>
-                        <div style={{ marginTop: 4, fontSize: 12, color: "#64748B", fontWeight: 650, ...clamp2Style() }}>
+                        <div style={{ marginTop: 4, ...styles.mutedSm, ...clamp2Style() }}>
                           {current.title} · {current.location}
                         </div>
                         <div style={{ marginTop: 6, fontSize: 12, color: "#0F172A", fontWeight: 750 }}>
@@ -1312,7 +1399,7 @@ export default function FinalistsPresentationPhoneMock() {
                       </div>
                     </div>
 
-                    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 8, flexShrink: 0 }}>
+                    <div style={{ ...styles.col, alignItems: "flex-end", gap: 8, flexShrink: 0 }}>
                       <Badge variant="outline">{moneyEUR(current.compMonthlyEUR)}/мес</Badge>
                       <RiskPill risk={current.risk} />
                     </div>
@@ -1337,7 +1424,7 @@ export default function FinalistsPresentationPhoneMock() {
                     }}
                   >
                     <div style={{ width: "100%", aspectRatio: "16 / 9" }} />
-                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <div style={{ position: "absolute", inset: 0, ...styles.rowCenter, justifyContent: "center" }}>
                       <Button variant="primary" icon={<Icon name="play" size={18} />} onClick={() => {}} style={{ borderRadius: 999, padding: "10px 14px" }}>
                         Видео-визитка · {current.introSeconds}с
                       </Button>
@@ -1348,13 +1435,13 @@ export default function FinalistsPresentationPhoneMock() {
                   </div>
 
                   {/* Why */}
-                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13, fontWeight: 900 }}>
+                  <div style={{ ...styles.col, gap: 8 }}>
+                    <div style={{ ...styles.rowCenter, gap: 8, fontSize: 13, fontWeight: 900 }}>
                       <Icon name="list" size={18} /> Почему в финале
                     </div>
-                    <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
+                    <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none", ...styles.col, gap: 8 }}>
                       {current.why.map((w, i) => (
-                        <li key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+                        <li key={i} style={{ ...styles.rowStart, gap: 8 }}>
                           <span style={{ width: 6, height: 6, borderRadius: 999, background: "#94A3B8", marginTop: 6, flexShrink: 0 }} />
                           <span style={{ fontSize: 13, fontWeight: 700, color: "#0F172A", lineHeight: "17px" }}>{w}</span>
                         </li>
@@ -1374,7 +1461,7 @@ export default function FinalistsPresentationPhoneMock() {
                   </div>
 
                   {/* Actions */}
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
+                  <div style={{ ...styles.grid3, gap: 8 }}>
                     <Button variant="secondary" icon={<Icon name="chatQ" size={18} />} onClick={() => {}} style={{ padding: "10px 10px" }}>
                       Вопросы
                     </Button>
@@ -1390,11 +1477,11 @@ export default function FinalistsPresentationPhoneMock() {
                     На доработку ассистенту
                   </Button>
 
-                  <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                  <div style={{ ...styles.col, gap: 8 }}>
                     <div style={{ fontSize: 13, fontWeight: 900 }}>Замечания по рискам</div>
-                    <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 8 }}>
+                    <ul style={{ margin: 0, paddingLeft: 0, listStyle: "none", ...styles.col, gap: 8 }}>
                       {current.riskNotes.map((r, i) => (
-                        <li key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+                        <li key={i} style={{ ...styles.rowStart, gap: 8 }}>
                           <span style={{ width: 6, height: 6, borderRadius: 999, background: "#94A3B8", marginTop: 6, flexShrink: 0 }} />
                           <span style={{ fontSize: 13, fontWeight: 700, color: "#0F172A", lineHeight: "17px" }}>{r}</span>
                         </li>
