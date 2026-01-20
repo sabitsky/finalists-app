@@ -14,8 +14,10 @@ import { ShareModal } from "@/components/finalists/ShareModal";
 import { ConfirmModal } from "@/components/finalists/ConfirmModal";
 import { DetailsSheet } from "@/components/finalists/DetailsSheet";
 import { useFinalistsPresentation } from "@/hooks/useFinalistsPresentation";
+import { featureFlags } from "@/lib/featureFlags";
 
 export function FinalistsPresentationPhoneMock() {
+  const comparisonV2 = featureFlags.comparisonV2;
   const {
     tab,
     setTab,
@@ -41,6 +43,14 @@ export function FinalistsPresentationPhoneMock() {
     setDetailOpen(true);
   };
 
+  const handleSelectCandidate = (index: number) => {
+    setSelectedIdx(index);
+    const candidate = candidates[index];
+    if (candidate) {
+      setPickedId(candidate.id);
+    }
+  };
+
   return (
     <div style={layoutStyles.page}>
       <div style={layoutStyles.phone}>
@@ -55,15 +65,24 @@ export function FinalistsPresentationPhoneMock() {
 
           <div style={{ marginTop: 12 }}>
             {tab === "finalists" ? (
-              <FinalistsTab candidates={candidates} pickedId={pickedId} onOpenDetail={handleOpenDetail} />
-            ) : null}
-            {tab === "compare" ? (
-              <CompareTab
+              <FinalistsTab
                 candidates={candidates}
                 pickedId={pickedId}
                 selectedIdx={selectedIdx}
                 onOpenDetail={handleOpenDetail}
+                onSelect={handleSelectCandidate}
+              />
+            ) : null}
+            {tab === "compare" ? (
+              <CompareTab
+                key={comparisonV2 ? "compare-v2" : "compare-v1"}
+                candidates={candidates}
+                pickedId={pickedId}
+                selectedIdx={selectedIdx}
+                onOpenDetail={handleOpenDetail}
+                onActivate={handleSelectCandidate}
                 comparison={comparison}
+                comparisonV2={comparisonV2}
               />
             ) : null}
           </div>
