@@ -9,6 +9,7 @@ import { Candidate } from "@/data/finalists";
 import { sharedStyles } from "@/components/finalists/styles";
 import { moneyEUR } from "@/lib/format";
 import { colors, font } from "@/lib/designSystem";
+import { ComparisonSection } from "@/components/finalists/ComparisonSection";
 
 export type CompareTabProps = {
   candidates: Candidate[];
@@ -16,9 +17,41 @@ export type CompareTabProps = {
   selectedIdx: number;
   onOpenDetail: (index: number) => void;
   comparison: { k: string; v: string[] }[];
+  comparisonV2?: boolean;
+  onActivate?: (index: number) => void;
 };
 
-export function CompareTab({ candidates, pickedId, selectedIdx, onOpenDetail, comparison }: CompareTabProps) {
+export function CompareTab({
+  candidates,
+  pickedId,
+  selectedIdx,
+  onOpenDetail,
+  comparison,
+  comparisonV2 = false,
+  onActivate,
+}: CompareTabProps) {
+  if (comparisonV2) {
+    const recommendedId = candidates.find((c) => c.assistantRecommended)?.id ?? candidates[0]?.id ?? "";
+    const activeId = candidates[selectedIdx]?.id ?? null;
+
+    return (
+      <ComparisonSection
+        candidates={candidates}
+        comparison={comparison}
+        activeId={activeId}
+        recommendedId={recommendedId}
+        onActivate={(id) => {
+          const index = candidates.findIndex((c) => c.id === id);
+          if (index >= 0) {
+            onActivate?.(index);
+          }
+        }}
+        headerTitle="Сравнение"
+        headerSubtitle="Нажмите, чтобы увидеть полный профиль кандидата"
+      />
+    );
+  }
+
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
       <div style={{ ...sharedStyles.rowBetween, padding: "0 2px" }}>

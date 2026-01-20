@@ -1,0 +1,51 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(110px, 1fr));
+  grid-auto-rows: 36px;
+  gap: 3px;
+  min-width: 330px;
+}
+
+.candidateCard {
+  position: relative;
+  display: grid;
+  grid-auto-rows: 36px;
+  border: 1px solid var(--card-border);
+  border-radius: var(--card-radius);
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+}
+
+.candidateCard:hover {
+  border-color: var(--card-border-hover);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.candidateCardActive {
+  border-color: var(--card-border-active);
+  box-shadow: var(--card-shadow-active);
+}
+
+.candidateCardRecommended {
+  background: var(--card-bg-recommended);
+}
+
+.scrollWrap {
+  width: 100%;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .scrollWrap {
+    overflow: hidden;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(110px, 1fr));
+    min-width: 100%;
+  }
+
+  .candidateCard {
+    scroll-snap-align: none;
+  }
+}
