@@ -1,5 +1,6 @@
 import * as React from "react";
 import { candidates as candidatesData } from "@/data/finalists";
+import type { ComparisonRow } from "@/components/finalists/ComparisonSection";
 import { moneyEUR } from "@/lib/format";
 
 export type TabKey = "finalists" | "compare";
@@ -18,7 +19,7 @@ export function useFinalistsPresentation() {
   const current = candidates[selectedIdx];
   const picked = pickedId ? candidates.find((c) => c.id === pickedId) || null : null;
 
-  const comparison = React.useMemo(
+  const comparison = React.useMemo<ComparisonRow[]>(
     () => [
       { k: "Английский", v: ["C2", "B2+", "C1"] },
       { k: "Ротации", v: ["да", "ограниченно", "да"] },

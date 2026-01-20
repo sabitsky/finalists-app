@@ -9,14 +9,14 @@ import { Candidate } from "@/data/finalists";
 import { sharedStyles } from "@/components/finalists/styles";
 import { moneyEUR } from "@/lib/format";
 import { colors, font } from "@/lib/designSystem";
-import { ComparisonSection } from "@/components/finalists/ComparisonSection";
+import { ComparisonSection, type ComparisonRow } from "@/components/finalists/ComparisonSection";
 
 export type CompareTabProps = {
   candidates: Candidate[];
   pickedId: string | null;
   selectedIdx: number;
   onOpenDetail: (index: number) => void;
-  comparison: { k: string; v: string[] }[];
+  comparison: ComparisonRow[];
   comparisonV2?: boolean;
   onActivate?: (index: number) => void;
 };
