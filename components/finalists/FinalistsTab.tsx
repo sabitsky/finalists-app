@@ -2,12 +2,11 @@ import * as React from "react";
 import { Badge } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
 import { RecommendedPill } from "@/components/ui/RecommendedPill";
-import { RiskPill } from "@/components/ui/RiskPill";
-import { Avatar } from "@/components/ui/Avatar";
 import { Candidate } from "@/data/finalists";
 import { moneyEUR } from "@/lib/format";
 import { colors, font } from "@/lib/designSystem";
 import { sharedStyles } from "@/components/finalists/styles";
+import Image from "next/image";
 
 export type FinalistsTabProps = {
   candidates: Candidate[];
@@ -16,14 +15,20 @@ export type FinalistsTabProps = {
 };
 
 export function FinalistsTab({ candidates, pickedId, onOpenDetail }: FinalistsTabProps) {
+  const candidatePhotos: Record<string, string> = {
+    c1: "/images/anna.jpeg",
+    c2: "/images/maria.png",
+    c3: "/images/elena.png",
+  };
+
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
       <div style={{ ...sharedStyles.rowBetween, padding: "0 2px" }}>
-        <div style={{ fontSize: 14, fontWeight: 850 }}>3 финалиста</div>
+        <div style={{ fontSize: 14, fontWeight: font.weight.extrabold, color: colors.ink }}>3 финалиста</div>
         <div style={{ ...sharedStyles.muted12 }}>Нажмите для деталей</div>
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {candidates.map((c, i) => {
           const isPicked = pickedId === c.id;
           return (
@@ -32,20 +37,39 @@ export function FinalistsTab({ candidates, pickedId, onOpenDetail }: FinalistsTa
               onClick={() => onOpenDetail(i)}
               style={{
                 appearance: "none",
-                border: isPicked ? "1px solid #111827" : "1px solid #E5E7EB",
-                background: "#FFFFFF",
-                borderRadius: 20,
-                padding: 12,
+                border: isPicked ? `1px solid ${colors.inkStrong}` : `1px solid ${colors.line}`,
+                background: colors.white,
+                borderRadius: 12,
+                padding: 14,
                 textAlign: "left",
                 cursor: "pointer",
-                boxShadow: "0 18px 30px rgba(15, 23, 42, 0.08)",
+                boxShadow: "none",
                 WebkitTapHighlightColor: "transparent",
               }}
               aria-label={`Открыть ${c.fullName}`}
             >
               <div style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                 <div style={{ position: "relative", flexShrink: 0, display: "inline-block" }}>
-                  <Avatar src={c.photoDataUri} alt={`Фото ${c.fullName}`} size={56} radius={18} />
+                  <div
+                    style={{
+                      position: "relative",
+                      width: 56,
+                      height: 56,
+                      borderRadius: 10,
+                      overflow: "hidden",
+                      background: colors.surfaceAlt,
+                      border: `1px solid ${colors.line}`,
+                    }}
+                  >
+                    <Image
+                      src={candidatePhotos[c.id] ?? c.photoDataUri}
+                      alt={`Фото ${c.fullName}`}
+                      fill
+                      sizes="56px"
+                      style={{ objectFit: "cover" }}
+                      priority={i === 0}
+                    />
+                  </div>
                   {isPicked ? (
                     <span
                       style={{
@@ -72,51 +96,55 @@ export function FinalistsTab({ candidates, pickedId, onOpenDetail }: FinalistsTa
                   <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 10 }}>
                     <div style={{ minWidth: 0 }}>
                       <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
-                        <div style={{ fontSize: 15, fontWeight: 850, color: colors.ink, maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                        <div style={{ fontSize: 15, fontWeight: font.weight.bold, color: colors.ink, maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
                           {c.fullName}
                         </div>
                       </div>
                       <div style={{ marginTop: 4, display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
                         <div style={{ ...sharedStyles.muted12, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                          {c.title}
+                          {c.categoryLabel || c.title}
                         </div>
                         {c.assistantRecommended ? <RecommendedPill /> : null}
+                      </div>
+                      <div style={{ marginTop: 4, display: "flex", alignItems: "center", gap: 6, color: colors.muted, fontSize: font.size.sm, fontWeight: font.weight.semibold, lineHeight: "16px" }}>
+                        <Icon name="pin" size={14} style={{ color: colors.muted }} />
+                        {c.locationLabel}
                       </div>
                     </div>
 
                     <div style={{ textAlign: "right", flexShrink: 0 }}>
-                      <div style={{ fontSize: 14, fontWeight: 900, color: colors.ink }}>{moneyEUR(c.compMonthlyEUR)}</div>
+                      <div style={{ fontSize: 14, fontWeight: font.weight.semibold, color: colors.ink }}>{moneyEUR(c.compMonthlyEUR)}</div>
                       <div style={{ ...sharedStyles.muted11 }}>в месяц</div>
                     </div>
                   </div>
 
                   <div style={{ marginTop: 8, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
-                    <RiskPill risk={c.risk} />
-                    <Badge variant="soft">{c.availability}</Badge>
+                    <Badge variant="outline" style={{ background: colors.surfaceAlt }}>{c.availability}</Badge>
                   </div>
 
                   <div
                     style={{
-                      marginTop: 8,
-                      borderRadius: 16,
-                      border: "1px solid #E5E7EB",
-                      background: "#F8FAFC",
+                      marginTop: 10,
+                      borderRadius: 10,
+                      border: `1px solid ${colors.line}`,
+                      background: colors.surfaceAlt,
                       padding: "8px 10px",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
                       gap: 10,
+                      minHeight: 36,
+                      opacity: c.hideIntro ? 0 : 1,
                     }}
                   >
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, fontWeight: 750, color: "#0F172A" }}>
-                      <Icon name="play" size={18} />
-                      Видео-визитка · {c.introSeconds}с
+                    <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12, fontWeight: font.weight.medium, color: colors.ink }}>
+                      {c.hideIntro ? null : <Icon name="play" size={18} />}
+                      {c.hideIntro ? null : `Видео-визитка · ${c.introSeconds}с`}
                     </div>
-                    <Badge variant="outline">Транскрипт</Badge>
                   </div>
 
-                  <div style={{ marginTop: 8 }}>
-                    <div style={{ fontSize: 13, fontWeight: font.weight.bold, color: colors.slate, lineHeight: "16px" }}>
+                  <div style={{ marginTop: 10 }}>
+                    <div style={{ fontSize: 12, fontWeight: font.weight.semibold, color: colors.slate, lineHeight: "16px" }}>
                       Почему этот кандидат
                     </div>
                     <div

@@ -25,10 +25,10 @@ export function Button({
   const base: React.CSSProperties = {
     appearance: "none",
     border: "1px solid transparent",
-    borderRadius: radii.sm,
+    borderRadius: radii.md,
     padding: "10px 12px",
     fontSize: font.size.md,
-    fontWeight: font.weight.semibold,
+    fontWeight: font.weight.medium,
     lineHeight: font.line.md,
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.5 : 1,
@@ -43,19 +43,20 @@ export function Button({
 
   const variants: Record<ButtonVariant, React.CSSProperties> = {
     primary: {
-      background: colors.inkStrong,
+      background: colors.brand,
       color: colors.white,
-      boxShadow: shadows.button,
+      borderColor: colors.brand,
+      boxShadow: "none",
     },
     secondary: {
       background: colors.surfaceAlt,
-      color: colors.inkStrong,
+      color: colors.ink,
       borderColor: colors.line,
-      boxShadow: shadows.buttonSoft,
+      boxShadow: "none",
     },
     ghost: {
       background: "transparent",
-      color: colors.inkStrong,
+      color: colors.ink,
       borderColor: "transparent",
       boxShadow: "none",
     },
@@ -63,13 +64,13 @@ export function Button({
       background: colors.dangerBg,
       color: colors.dangerInk,
       borderColor: colors.dangerBd,
-      boxShadow: "0 6px 18px rgba(153,27,27,0.10)",
+      boxShadow: "none",
     },
     outline: {
       background: colors.white,
-      color: colors.inkStrong,
+      color: colors.ink,
       borderColor: colors.line,
-      boxShadow: "0 6px 18px rgba(17,24,39,0.06)",
+      boxShadow: "none",
     },
   };
 

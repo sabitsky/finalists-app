@@ -22,7 +22,8 @@ export type IconName =
   | "chatQ"
   | "riskLow"
   | "riskMed"
-  | "riskHigh";
+  | "riskHigh"
+  | "pin";
 
 export type IconProps = {
   name: IconName;
@@ -160,6 +161,11 @@ export function Icon({ name, size = 18, style }: IconProps) {
         React.createElement("path", { d: "M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6l8-4z", key: "riskHigh-1" }),
         React.createElement("path", { d: "M15 9l-6 6", key: "riskHigh-2" }),
         React.createElement("path", { d: "M9 9l6 6", key: "riskHigh-3" })
+      );
+    case "pin":
+      return svg(
+        React.createElement("path", { d: "M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z", key: "pin-1" }),
+        React.createElement("circle", { cx: "12", cy: "10", r: "2.5", key: "pin-2" })
       );
     default:
       return null;

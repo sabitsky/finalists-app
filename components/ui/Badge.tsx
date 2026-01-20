@@ -16,16 +16,16 @@ export function Badge({ children, variant = "soft", style }: BadgeProps) {
     gap: 6,
     padding: "4px 10px",
     fontSize: font.size.xs,
-    fontWeight: font.weight.semibold,
-    borderRadius: radii.pill,
+    fontWeight: font.weight.medium,
+    borderRadius: radii.md,
     border: "1px solid transparent",
     lineHeight: font.line.sm,
     whiteSpace: "nowrap",
   };
 
   const variants: Record<BadgeVariant, React.CSSProperties> = {
-    soft: { background: colors.surfaceAlt, color: colors.inkStrong, borderColor: colors.line },
-    outline: { background: colors.white, color: colors.inkStrong, borderColor: colors.line },
+    soft: { background: colors.surfaceAlt, color: colors.ink, borderColor: colors.line },
+    outline: { background: colors.white, color: colors.ink, borderColor: colors.line },
     violet: { background: colors.violetBg, color: colors.violetInk, borderColor: colors.violetBd },
   };
 

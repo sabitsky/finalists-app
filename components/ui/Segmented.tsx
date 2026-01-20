@@ -11,7 +11,7 @@ export function Segmented({ value, onChange }: SegmentedProps) {
     display: "flex",
     gap: 6,
     padding: 6,
-    borderRadius: radii.pill,
+    borderRadius: radii.lg,
     background: colors.surfaceAlt,
     border: `1px solid ${colors.line}`,
   };
@@ -24,16 +24,14 @@ export function Segmented({ value, onChange }: SegmentedProps) {
         style={{
           flex: 1,
           padding: "10px 12px",
-          borderRadius: radii.pill,
+          borderRadius: radii.md,
           border: "1px solid transparent",
           fontSize: font.size.sm,
-          fontWeight: 750,
+          fontWeight: font.weight.medium,
           cursor: "pointer",
-          background: active ? colors.inkStrong : colors.white,
-          color: active ? colors.white : colors.inkStrong,
-          boxShadow: active
-            ? "0 10px 24px rgba(17,24,39,0.20)"
-            : "0 8px 18px rgba(17,24,39,0.06)",
+          background: active ? colors.brand : colors.white,
+          color: active ? colors.white : colors.ink,
+          boxShadow: "none",
           WebkitTapHighlightColor: "transparent",
         }}
       >

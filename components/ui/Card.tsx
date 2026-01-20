@@ -13,7 +13,7 @@ export function Card({ children, style }: CardProps) {
         border: `1px solid ${colors.line}`,
         background: colors.white,
         borderRadius: radii.lg,
-        boxShadow: shadows.soft,
+        boxShadow: "none",
         ...style,
       }}
     >

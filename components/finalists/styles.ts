@@ -5,9 +5,10 @@ export const layoutStyles = {
   page: {
     minHeight: "100vh",
     width: "100%",
-    background: `linear-gradient(180deg, ${colors.surface} 0%, ${colors.surfaceAlt} 100%)`,
+    background: colors.surface,
     padding: 16,
-    fontFamily: "Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
+    fontFamily: font.family.ui,
+    fontVariantNumeric: "lining-nums",
     color: colors.ink,
   } satisfies CSSProperties,
   phone: {
@@ -34,9 +35,9 @@ export const layoutStyles = {
     bottom: 0,
     paddingTop: 12,
     paddingBottom: 12,
-    background: "rgba(255,255,255,0.92)",
-    backdropFilter: "blur(10px)",
-    borderTop: "1px solid rgba(229,231,235,0.8)",
+    background: "rgba(245,247,250,0.95)",
+    backdropFilter: "blur(8px)",
+    borderTop: `1px solid ${colors.line}`,
   } satisfies CSSProperties,
 } as const;
 
@@ -47,8 +48,18 @@ export const sharedStyles = {
     alignItems: "center",
     justifyContent: "space-between",
   } satisfies CSSProperties,
-  muted12: { fontSize: font.size.sm, color: colors.muted, fontWeight: font.weight.semibold } satisfies CSSProperties,
-  muted11: { fontSize: font.size.xs, color: colors.muted, fontWeight: font.weight.semibold } satisfies CSSProperties,
+  muted12: {
+    fontSize: font.size.sm,
+    color: colors.muted,
+    fontWeight: font.weight.medium,
+    fontFamily: font.family.ui,
+  } satisfies CSSProperties,
+  muted11: {
+    fontSize: font.size.xs,
+    color: colors.muted,
+    fontWeight: font.weight.medium,
+    fontFamily: font.family.ui,
+  } satisfies CSSProperties,
 } as const;
 
 export function clamp2Style(): CSSProperties {

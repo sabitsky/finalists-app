@@ -15,6 +15,8 @@ export type Candidate = {
   fullName: string;
   title: string;
   location: string;
+  categoryLabel: string;
+  locationLabel: string;
   compMonthlyEUR: number;
   availability: string;
   risk: RiskLevel;
@@ -25,6 +27,7 @@ export type Candidate = {
   riskNotes: string[];
   highlights: CandidateHighlight[];
   introSeconds: number;
+  hideIntro?: boolean;
   photoDataUri: string;
 };
 
@@ -38,7 +41,7 @@ export type Position = {
 };
 
 export const position: Position = {
-  role: "Англоговорящая няня (с проживанием)",
+  role: "Англоговорящяя гувернантка со знанием русского языка для трех девочек 5, 8 и 8 лет в Московской области",
   location: "Дубай ⇄ Белград",
   finalists: 3,
   total: 42,
@@ -53,6 +56,8 @@ export const candidates: Candidate[] = [
     fullName: "Анна Кузнецова",
     title: "Гувернантка / English-only",
     location: "Белград (готова к релокации)",
+    categoryLabel: "Няня / Гувернантка",
+    locationLabel: "Ницца, Франция",
     compMonthlyEUR: 5200,
     availability: "Старт через 10 дней",
     risk: "low",
@@ -83,6 +88,8 @@ export const candidates: Candidate[] = [
     fullName: "Мария Смирнова",
     title: "Няня (Montessori)",
     location: "Алматы",
+    categoryLabel: "Няня / Гувернантка",
+    locationLabel: "Ницца, Франция",
     compMonthlyEUR: 4600,
     availability: "Старт через 3–4 недели",
     risk: "med",
@@ -104,6 +111,7 @@ export const candidates: Candidate[] = [
       { k: "Вождение", v: "нет", tone: "neg" },
     ],
     introSeconds: 28,
+    hideIntro: true,
     photoDataUri: svgAvatar("b", "M S"),
   },
   {
@@ -112,6 +120,8 @@ export const candidates: Candidate[] = [
     fullName: "Елена Петрова",
     title: "Няня + репетитор (англ/мат)",
     location: "Киев (сейчас в ЕС)",
+    categoryLabel: "Няня / Гувернантка",
+    locationLabel: "Ницца, Франция",
     compMonthlyEUR: 5900,
     availability: "Старт на следующей неделе",
     risk: "med",
