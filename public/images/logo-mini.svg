@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-label="EliteStaff icon">
+  <title>EliteStaff icon</title>
+  <g fill="currentColor" transform="translate(23 18)">
+    <path d="M60 116
+             C28 108 8 80 10 48
+             C12 18 34 0 60 0
+             C92 0 114 22 114 54
+             C114 86 92 110 60 116 Z" transform="rotate(-14 60 58)"></path>
+    <path d="M92 114
+             C74 110 60 96 58 78
+             C56 56 72 34 96 32
+             C122 30 140 50 136 74
+             C132 98 110 110 92 114 Z" transform="rotate(14 96 76)"></path>
+  </g>
+</svg>
