@@ -46,8 +46,14 @@ export function CompareTab({
             onActivate?.(index);
           }
         }}
+        onOpenDetail={(id) => {
+          const index = candidates.findIndex((c) => c.id === id);
+          if (index >= 0) {
+            onOpenDetail(index);
+          }
+        }}
         headerTitle="Сравнение"
-        headerSubtitle="Нажмите, чтобы увидеть полный профиль кандидата"
+        headerSubtitle=""
       />
     );
   }

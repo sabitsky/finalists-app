@@ -11,10 +11,12 @@ import Image from "next/image";
 export type FinalistsTabProps = {
   candidates: Candidate[];
   pickedId: string | null;
+  selectedIdx: number;
   onOpenDetail: (index: number) => void;
+  onSelect: (index: number) => void;
 };
 
-export function FinalistsTab({ candidates, pickedId, onOpenDetail }: FinalistsTabProps) {
+export function FinalistsTab({ candidates, pickedId, selectedIdx, onOpenDetail, onSelect }: FinalistsTabProps) {
   const candidatePhotos: Record<string, string> = {
     c1: "/images/anna.jpeg",
     c2: "/images/maria.png",
@@ -25,19 +27,27 @@ export function FinalistsTab({ candidates, pickedId, onOpenDetail }: FinalistsTa
     <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
       <div style={{ ...sharedStyles.rowBetween, padding: "0 2px" }}>
         <div style={{ fontSize: 14, fontWeight: font.weight.extrabold, color: colors.ink }}>3 финалиста</div>
-        <div style={{ ...sharedStyles.muted12 }}>Нажмите для деталей</div>
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {candidates.map((c, i) => {
           const isPicked = pickedId === c.id;
+          const isSelected = selectedIdx === i;
           return (
-            <button
+            <div
               key={c.id}
-              onClick={() => onOpenDetail(i)}
+              onClick={() => onSelect(i)}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  onSelect(i);
+                }
+              }}
               style={{
                 appearance: "none",
-                border: isPicked ? `1px solid ${colors.inkStrong}` : `1px solid ${colors.line}`,
+                border: isSelected ? `1px solid ${colors.inkStrong}` : `1px solid ${colors.line}`,
                 background: colors.white,
                 borderRadius: 12,
                 padding: 14,
@@ -164,9 +174,35 @@ export function FinalistsTab({ candidates, pickedId, onOpenDetail }: FinalistsTa
                       })()}
                     </div>
                   </div>
+
+                  <button
+                    type="button"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onOpenDetail(i);
+                    }}
+                    style={{
+                      marginTop: 10,
+                      background: "transparent",
+                      border: "none",
+                      padding: 0,
+                      color: colors.inkStrong,
+                      fontSize: 11,
+                      fontWeight: font.weight.medium,
+                      cursor: "pointer",
+                      textAlign: "left",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                      textDecoration: "underline",
+                    }}
+                  >
+                    <Icon name="chevR" size={12} style={{ color: colors.muted }} />
+                    Открыть полное резюме
+                  </button>
                 </div>
               </div>
-            </button>
+            </div>
           );
         })}
       </div>

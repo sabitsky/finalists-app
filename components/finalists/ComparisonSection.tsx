@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Candidate } from "@/data/finalists";
 import { comparisonColors, comparisonShadows } from "@/lib/comparisonTokens";
-import { font, radii } from "@/lib/designSystem";
+import { colors, font, radii } from "@/lib/designSystem";
 import { RecommendedPill } from "@/components/ui/RecommendedPill";
 import styles from "@/components/finalists/comparison.module.css";
 
@@ -18,6 +18,7 @@ export type ComparisonSectionProps = {
   activeId: string | null;
   recommendedId: string;
   onActivate: (id: string) => void;
+  onOpenDetail: (id: string) => void;
   headerTitle: string;
   headerSubtitle: string;
   footerActions?: React.ReactNode;
@@ -31,6 +32,7 @@ export function ComparisonSection({
   activeId,
   recommendedId,
   onActivate,
+  onOpenDetail,
   headerTitle,
   headerSubtitle,
   footerActions,
@@ -67,6 +69,7 @@ export function ComparisonSection({
               isActive={candidate.id === activeId}
               isRecommended={candidate.id === recommendedId}
               onActivate={() => onActivate(candidate.id)}
+              onOpenDetail={() => onOpenDetail(candidate.id)}
               rows={orderedRows.map((row) => ({ key: row.k, value: row.v[idx] ?? "" }))}
             />
           ))}
@@ -84,9 +87,11 @@ export function ComparisonHeader({ title, subtitle }: { title: string; subtitle:
       <div style={{ fontSize: 16, fontWeight: font.weight.semibold, color: comparisonColors.textPrimary }}>
         {title}
       </div>
-      <div style={{ fontSize: 13, fontWeight: font.weight.medium, color: comparisonColors.textSecondary }}>
-        {subtitle}
-      </div>
+      {subtitle ? (
+        <div style={{ fontSize: 13, fontWeight: font.weight.medium, color: comparisonColors.textSecondary }}>
+          {subtitle}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -113,6 +118,7 @@ export function CandidateCard({
   isActive,
   isRecommended,
   onActivate,
+  onOpenDetail,
 }: {
   columnIndex: number;
   totalRows: number;
@@ -121,22 +127,22 @@ export function CandidateCard({
   isActive: boolean;
   isRecommended: boolean;
   onActivate: () => void;
+  onOpenDetail: () => void;
 }) {
   const cardVars: React.CSSProperties = {
     "--card-bg": comparisonColors.surface,
     "--card-bg-recommended": comparisonColors.recommendedBg,
     "--card-border": isRecommended ? comparisonColors.borderStrong : comparisonColors.borderSoft,
     "--card-border-hover": comparisonColors.borderStrong,
-    "--card-border-active": comparisonColors.borderStrong,
+    "--card-border-active": colors.inkStrong,
     "--card-shadow": isRecommended ? comparisonShadows.cardStrong : "none",
     "--card-shadow-hover": comparisonShadows.cardStrong,
-    "--card-shadow-active": comparisonShadows.cardStrong,
+    "--card-shadow-active": "none",
     "--card-radius": `${radii.lg}px`,
   } as React.CSSProperties;
 
   return (
-    <button
-      type="button"
+    <div
       onClick={onActivate}
       className={[
         styles.candidateCard,
@@ -155,6 +161,14 @@ export function CandidateCard({
         minHeight: 36 * totalRows,
         position: "relative",
       }}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onActivate();
+        }
+      }}
       aria-pressed={isActive}
       aria-label={`${candidate.fullName}. ${candidate.title}. ${candidate.compMonthlyEUR.toLocaleString("ru-RU")} € в месяц.`}
     >
@@ -162,7 +176,32 @@ export function CandidateCard({
       {rows.slice(0, 6).map((row, index) => (
         <ComparisonValue key={`${candidate.id}-${row.key}`} value={row.value} rowKey={row.key} isPrice={index === rows.length - 1} />
       ))}
-    </button>
+      <button
+        type="button"
+        onClick={(event) => {
+          event.stopPropagation();
+          onOpenDetail();
+        }}
+        style={{
+          marginTop: 6,
+          background: "transparent",
+          border: "none",
+          padding: 0,
+          color: comparisonColors.textPrimary,
+          fontSize: 10,
+          fontWeight: font.weight.medium,
+          cursor: "pointer",
+          textAlign: "left",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 6,
+          textDecoration: "underline",
+        }}
+      >
+        <span style={{ color: comparisonColors.textMuted }}>›</span>
+        Открыть полное резюме
+      </button>
+    </div>
   );
 }
 
