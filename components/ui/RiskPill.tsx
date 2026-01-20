@@ -1,10 +1,10 @@
 import * as React from "react";
 import { colors, font, radii } from "@/lib/designSystem";
-import { Icon } from "@/components/ui/Icon";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import { RiskLevel } from "@/data/finalists";
 
 export function RiskPill({ risk }: { risk: RiskLevel }) {
-  const meta =
+  const meta: { label: string; icon: IconName; bg: string; bd: string; fg: string } =
     risk === "low"
       ? {
           label: "Низкий",
