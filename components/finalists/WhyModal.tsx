@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Overlay } from "@/components/ui/Overlay";
-import { Position } from "@/data/finalists";
+import type { Position } from "@/types";
 import { sharedStyles } from "@/components/finalists/styles";
 
 export type WhyModalProps = {

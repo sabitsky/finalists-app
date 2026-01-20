@@ -1,10 +1,10 @@
 import * as React from "react";
 import { candidates as candidatesData } from "@/data/finalists";
-import type { ComparisonRow } from "@/components/finalists/ComparisonSection";
+import type { ComparisonRow, TabKey, ConfirmKey } from "@/types";
 import { moneyEUR } from "@/lib/format";
 
-export type TabKey = "finalists" | "compare";
-export type ConfirmKey = "pick" | "none" | null;
+// Re-export types for backwards compatibility
+export type { TabKey, ConfirmKey } from "@/types";
 
 export function useFinalistsPresentation() {
   const [tab, setTab] = React.useState<TabKey>("finalists");

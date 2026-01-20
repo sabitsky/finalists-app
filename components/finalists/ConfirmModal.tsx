@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Overlay } from "@/components/ui/Overlay";
 import { Avatar } from "@/components/ui/Avatar";
-import { Candidate } from "@/data/finalists";
+import type { Candidate } from "@/types";
 import { moneyEUR } from "@/lib/format";
 import { sharedStyles } from "@/components/finalists/styles";
 

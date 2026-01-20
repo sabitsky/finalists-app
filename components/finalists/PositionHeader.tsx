@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { Position } from "@/data/finalists";
+import type { Position } from "@/types";
 import { sharedStyles } from "@/components/finalists/styles";
 import { colors, font } from "@/lib/designSystem";
 

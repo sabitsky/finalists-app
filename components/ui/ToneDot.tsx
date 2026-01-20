@@ -1,7 +1,6 @@
 import * as React from "react";
 import { colors } from "@/lib/designSystem";
-
-export type Tone = "pos" | "mid" | "neg";
+import type { Tone } from "@/types";
 
 export function ToneDot({ tone }: { tone: Tone }) {
   const color = tone === "pos" ? colors.positive : tone === "neg" ? colors.negative : colors.warnStrong;

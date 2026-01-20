@@ -10,7 +10,7 @@ import { ToneDot } from "@/components/ui/ToneDot";
 import { RiskPill } from "@/components/ui/RiskPill";
 import { RecommendedPill } from "@/components/ui/RecommendedPill";
 import { Avatar } from "@/components/ui/Avatar";
-import { Candidate } from "@/data/finalists";
+import type { Candidate } from "@/types";
 import { moneyEUR } from "@/lib/format";
 import { clamp2Style } from "@/components/finalists/styles";
 

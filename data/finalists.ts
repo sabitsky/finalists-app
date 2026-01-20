@@ -1,44 +1,8 @@
 import { svgAvatar } from "@/lib/avatars";
+import type { Candidate, Position } from "@/types";
 
-export type RiskLevel = "low" | "med" | "high";
-export type Tone = "pos" | "mid" | "neg";
-
-export type CandidateHighlight = {
-  k: string;
-  v: string;
-  tone: Tone;
-};
-
-export type Candidate = {
-  id: string;
-  name: string;
-  fullName: string;
-  title: string;
-  location: string;
-  categoryLabel: string;
-  locationLabel: string;
-  compMonthlyEUR: number;
-  availability: string;
-  risk: RiskLevel;
-  assistantRecommended?: boolean;
-  decisionReadyBadges: string[];
-  why: string[];
-  whyText?: string;
-  riskNotes: string[];
-  highlights: CandidateHighlight[];
-  introSeconds: number;
-  hideIntro?: boolean;
-  photoDataUri: string;
-};
-
-export type Position = {
-  role: string;
-  location: string;
-  finalists: number;
-  total: number;
-  preparedBy: string;
-  updatedAt: string;
-};
+// Re-export types for backwards compatibility
+export type { RiskLevel, Tone, CandidateHighlight, Candidate, Position } from "@/types";
 
 export const position: Position = {
   role: "Англоговорящяя гувернантка со знанием русского языка для трех девочек 5, 8 и 8 лет в Московской области",

@@ -1,16 +1,12 @@
 import * as React from "react";
-import { Candidate } from "@/data/finalists";
+import type { Candidate, ComparisonRow, ComparisonRowKey } from "@/types";
 import { comparisonColors, comparisonShadows } from "@/lib/comparisonTokens";
 import { colors, font, radii } from "@/lib/designSystem";
 import { RecommendedPill } from "@/components/ui/RecommendedPill";
 import styles from "@/components/finalists/comparison.module.css";
 
-export type ComparisonRowKey = "Английский" | "Ротации" | "Репетиторство" | "Старт" | "€ / месяц";
-
-export type ComparisonRow = {
-  k: ComparisonRowKey;
-  v: string[];
-};
+// Re-export types for backwards compatibility
+export type { ComparisonRowKey, ComparisonRow } from "@/types";
 
 export type ComparisonSectionProps = {
   candidates: Candidate[];

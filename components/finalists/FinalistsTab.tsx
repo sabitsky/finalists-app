@@ -2,7 +2,7 @@ import * as React from "react";
 import { Badge } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
 import { RecommendedPill } from "@/components/ui/RecommendedPill";
-import { Candidate } from "@/data/finalists";
+import type { Candidate } from "@/types";
 import { moneyEUR } from "@/lib/format";
 import { colors, font } from "@/lib/designSystem";
 import { sharedStyles } from "@/components/finalists/styles";

@@ -1,7 +1,7 @@
 import * as React from "react";
 import { colors, font, radii } from "@/lib/designSystem";
 import { Icon, type IconName } from "@/components/ui/Icon";
-import { RiskLevel } from "@/data/finalists";
+import type { RiskLevel } from "@/types";
 
 export function RiskPill({ risk }: { risk: RiskLevel }) {
   const meta: { label: string; icon: IconName; bg: string; bd: string; fg: string } =

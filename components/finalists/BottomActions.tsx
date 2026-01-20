@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { Candidate } from "@/data/finalists";
+import type { Candidate } from "@/types";
 import { sharedStyles } from "@/components/finalists/styles";
 
 export type BottomActionsProps = {

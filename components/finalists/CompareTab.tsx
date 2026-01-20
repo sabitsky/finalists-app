@@ -5,11 +5,11 @@ import { Icon } from "@/components/ui/Icon";
 import { RiskPill } from "@/components/ui/RiskPill";
 import { Separator } from "@/components/ui/Separator";
 import { Avatar } from "@/components/ui/Avatar";
-import { Candidate } from "@/data/finalists";
+import type { Candidate, ComparisonRow } from "@/types";
 import { sharedStyles } from "@/components/finalists/styles";
 import { moneyEUR } from "@/lib/format";
 import { colors, font } from "@/lib/designSystem";
-import { ComparisonSection, type ComparisonRow } from "@/components/finalists/ComparisonSection";
+import { ComparisonSection } from "@/components/finalists/ComparisonSection";
 
 export type CompareTabProps = {
   candidates: Candidate[];
