@@ -12,11 +12,20 @@ export const metadata: Metadata = {
     siteName: "EliteStaff",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "EliteStaff — Private Staff OS for UHNW households",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "EliteStaff — Private Staff OS for UHNW Households",
     description: "Shortlist • Vetting • Operations — powered by AI, delivered by people.",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "EliteStaff OG image" }],
   },
 };
 
