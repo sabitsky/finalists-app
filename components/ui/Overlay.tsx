@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 
 export type OverlayProps = {
@@ -8,6 +9,15 @@ export type OverlayProps = {
 };
 
 export function Overlay({ open, onClose, children, align = "center" }: OverlayProps) {
+  React.useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open]);
+
   if (!open) return null;
 
   return (
@@ -19,7 +29,9 @@ export function Overlay({ open, onClose, children, align = "center" }: OverlayPr
         display: "flex",
         alignItems: align === "bottom" ? "flex-end" : "center",
         justifyContent: "center",
-        background: "rgba(17,24,39,0.40)",
+        background: "rgba(17,24,39,0.32)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
         padding: 16,
       }}
     >
