@@ -34,6 +34,7 @@ export type Candidate = {
 export type Position = {
   role: string;
   location: string;
+  displayLocation?: string;
   finalists: number;
   total: number;
   preparedBy: string;
@@ -43,6 +44,7 @@ export type Position = {
 export const position: Position = {
   role: "Англоговорящяя гувернантка со знанием русского языка для трех девочек 5, 8 и 8 лет в Московской области",
   location: "Дубай ⇄ Белград",
+  displayLocation: "Московская обл.",
   finalists: 3,
   total: 42,
   preparedBy: "Ассистент",

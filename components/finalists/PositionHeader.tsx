@@ -30,7 +30,12 @@ export function PositionHeader({ position, onWhy }: PositionHeaderProps) {
         >
           {position.role}
         </div>
-        <div style={{ marginTop: 4, ...sharedStyles.muted12 }}>{position.location}</div>
+        <div style={{ marginTop: 4, display: "flex", alignItems: "center", gap: 6, ...sharedStyles.muted12 }}>
+          <Icon name="pin" size={14} style={{ color: colors.muted }} />
+          <span style={{ color: colors.muted }}>
+            {position.displayLocation ?? position.location}
+          </span>
+        </div>
       </div>
 
       <div style={{ marginTop: 10, ...sharedStyles.rowBetween, alignItems: "center", gap: 12 }}>
